@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  code-server:
+    build: .
+    container_name: code-server:local
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./:/home/coder/mount
+
+# UID=${UID} GID=${GID} docker-compose up
