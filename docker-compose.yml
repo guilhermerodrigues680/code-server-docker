@@ -1,13 +1,19 @@
-version: '3'
+version: '3' 
 
 services:
   code-server:
     build: .
     container_name: code-server-local
     ports: 
-      - "8080:8080"
+      - "8082:8080"
+      - "8090:8090"
+      - "8091:8091"
+      - "8092:8092"
+      - "8093:8093"
+      - "8094:8094"
     volumes:
       - ./:/home/coder/mount
     command: "--cert /home/coder/cert.crt --cert-key /home/coder/cert.key"
 
 # UID=${UID} GID=${GID} docker-compose up
+# docker-compose exec code-server cat /home/coder/.config/code-server/config.yaml
