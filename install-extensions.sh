@@ -3,7 +3,7 @@ install_extension() {
     # $1 = PUBLISHER, $2 = EXTENSIONNAME, $3 = VERSION
     echo "Intalando :: PUBLISHER: $1 , EXTENSIONNAME: $2 , VERSION: $3"
 
-    curl -L https://${1}.gallery.vsassets.io/_apis/public/gallery/publisher/${1}/extension/${2}/${3}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage | bsdtar -xvf - extension && \
+    curl -sL https://${1}.gallery.vsassets.io/_apis/public/gallery/publisher/${1}/extension/${2}/${3}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage | bsdtar -xvf - extension && \
     mv extension /home/coder/.local/share/code-server/extensions/${1}.${2}-${3}
 
     echo "Sucesso! ${1}.${2}-${3} instalado."
