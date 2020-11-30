@@ -27,6 +27,20 @@ RUN sudo apt-get update && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+## GRAALVM
+RUN sudo apt-get update && \
+    sudo apt-get install -y build-essential libz-dev zlib1g-dev && \
+    sudo apt-get -q clean -y && \
+    sudo rm -rf /var/lib/apt/lists/* && \
+    curl -OL https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-linux-amd64-20.3.0.tar.gz && \
+    tar -C /home/coder -zxf graalvm-ce-java11-linux-amd64-20.3.0.tar.gz && \
+    rm -f graalvm-ce-java11-linux-amd64-20.3.0.tar.gz
+
+ENV PATH="/home/coder/graalvm-ce-java11-20.3.0/bin:${PATH}"
+ENV JAVA_HOME="/home/coder/graalvm-ce-java11-20.3.0"
+
+RUN gu install native-image
+
 WORKDIR /home/coder/
 RUN openssl req \
     -newkey rsa:2048 -nodes -keyout cert.key \
